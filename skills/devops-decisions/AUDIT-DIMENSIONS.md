@@ -1,6 +1,6 @@
 # Audit Dimensions
 
-Walk every dimension during an audit engagement; mark each pass / risk / gap.
+Walk every dimension during an audit engagement; mark each pass / risk / gap / unknown with supporting evidence. Missing access or telemetry is unknown, not a pass. Explain any non-applicable dimension.
 
 - **Source control strategy** — repo structure, monorepo vs polyrepo, code ownership
 - **Branching model** — trunk-based vs GitFlow vs other, and how it maps to release cadence

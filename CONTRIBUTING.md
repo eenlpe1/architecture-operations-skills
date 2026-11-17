@@ -1,13 +1,13 @@
 # Contributing
 
-Thanks for helping improve Architecture Decisions. Contributions may update the shared skills, their supporting references, or the Codex and Claude Code plugin metadata.
+Thanks for helping improve Architecture & Operations Skills. Contributions may update the shared skills, their supporting references, or the Codex and Claude Code plugin metadata.
 
 ## Before making a change
 
 - Open an issue first for substantial behavior changes or new skills.
 - Keep each pull request focused on one concern.
-- Do not duplicate skill content for individual clients. Codex and Claude Code share the canonical files under `skills/`.
-- Preserve the existing decision workflow: frame the choice, evaluate every applicable dimension, state the accepted trade-off, and record a concrete decision.
+- Do not duplicate skill content for individual clients. Codex, Claude Code, and Antigravity share the canonical files under `skills/`.
+- For decision skills, preserve framing, evidence-backed evaluation, and a recorded proposed or accepted choice. For operations, preserve target verification, evidence, authorized actions, and observed outcomes.
 
 ## Changing a skill
 
@@ -37,7 +37,7 @@ Before opening a pull request:
 1. Validate `.codex-plugin/plugin.json` with the Codex plugin validator.
 2. Validate every changed `skills/<skill-name>` directory with the Codex skill validator.
 3. Confirm that all JSON files parse successfully.
-4. Run `git diff --check` to detect whitespace errors.
+4. Run `python3 scripts/validate.py`, `python3 -m unittest discover -s tests`, and `git diff --check`.
 5. Review the rendered Markdown and verify all relative links.
 
 If the Codex validation tools are unavailable locally, mention that in the pull request and include the checks you were able to run.
