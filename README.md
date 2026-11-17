@@ -25,9 +25,22 @@ All three support automatic selection when their descriptions match the request.
 
 Local fixes and validation follow task scope. Cloud mutations, workflow reruns/deployments, state changes, and external messages require specific authorization; existing authorization is reused within scope. This package does not start a daemon, schedule checks, send alerts, or install cloud credentials.
 
+## Prerequisites
+
+Install and authenticate your chosen coding agent first. Global setup requires Python 3.10+, Git, and local `SKILL.md` discovery support. Operational tools are needed only for the workload being investigated:
+
+| Workload | Tools and access |
+| --- | --- |
+| GitHub Actions and releases | `gh` authenticated to the target repository, plus local Git |
+| AWS infrastructure and ECS | AWS CLI with an appropriate profile/SSO session and access to the target account |
+| Terraform | The repository's Terraform version, provider configuration, backend access, and environment inputs |
+| Service reliability | Access to the service's existing logs, metrics, health checks, and runbooks |
+
+The skills discover available tools and report missing access. Installing them does not install these CLIs, authenticate accounts, or grant permissions.
+
 ## Global installation from a checkout
 
-Requires Python 3.10+ and agents that support local `SKILL.md` discovery. First review the skills and installer, then run:
+For one shared installation across Codex, Claude Code, and Antigravity, review the skills and installer, then run:
 
 ```sh
 git clone https://github.com/eenlpe1/architecture-operations-skills.git
@@ -38,9 +51,27 @@ python3 scripts/install-global.py --check
 
 The installer links this checkout's skills into `~/.agents/skills`, shares the whole existing library with `~/.claude/skills`, and configures Antigravity's `~/.gemini/config/skills.json` with an absolute shared-library path. It preserves unrelated entries/settings and refuses conflicting skill paths. Changed manifests receive private backups beside the original. Fully redundant legacy alias-directory entries are collapsed to avoid duplicate discovery; filtered entries are retained.
 
-Restart clients after installation. Keep the checkout at its installed location: links track its files. Update with `git pull --ff-only` on a clean, appropriate branch and rerun the installer to expose newly added skills. To relocate a checkout, explicitly remove only its installer-created links before installing from the new path. Do not delete shared skill directories containing other skills.
+Start a new agent session after installation so its skill catalog is refreshed. The skills apply across projects for the current OS user; other users and remote/cloud environments need their own installation. Keep the checkout at its installed location because global links point to its files. See [Updating a checkout installation](#updating-a-checkout-installation) after new changes merge.
+
+To relocate a checkout, explicitly remove only its installer-created links before installing from the new path. Do not delete shared skill directories containing other skills.
 
 The installer changes user-level skill discovery only; it does not install/remove plugins or alter AWS credentials. Rerun it after adding shared skills. `--check` is read-only; `--home` exists for isolated tests.
+
+## Updating a checkout installation
+
+From the checkout used for global installation, first ensure the working tree is clean. Commit or stash your own changes before switching branches. Fetch the merged code and fast-forward local `main`:
+
+```sh
+git fetch origin
+git switch main
+git merge --ff-only origin/main
+python3 scripts/install-global.py
+python3 scripts/install-global.py --check
+```
+
+The existing links immediately reference the checkout's updated files. Rerunning the installer exposes any newly added skills and refreshes discovery configuration; `--check` verifies it without changes. Start a new agent session to load the updated catalog and instructions.
+
+Keep the globally linked checkout on `main` for normal use. Use a separate development checkout or worktree when experimenting: global links also expose uncommitted files and branch changes. If fast-forwarding fails, resolve the local divergence before retrying; this update procedure does not reset or discard work.
 
 ## Plugin installation
 
