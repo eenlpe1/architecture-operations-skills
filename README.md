@@ -2,7 +2,7 @@
 
 Portable skills for architecture decisions, CI/CD, Terraform, incident response, and SRE reliability work across Codex, Claude Code, and Antigravity. Use installed CLIs and native agent tools; no hosted DevOps service or MCP connection is required.
 
-Current plugin version: **1.1.0**. The plugin identifier remains `architecture-decisions` for compatibility; the repository is now `eenlpe1/architecture-operations-skills`.
+Latest tagged release: [**v1.0.2**](https://github.com/eenlpe1/architecture-operations-skills/releases/tag/v1.0.2). That release currently embeds plugin version **1.1.0** in both client manifests; the release tag and plugin metadata version differ. The plugin identifier remains `architecture-decisions` for compatibility; the repository is `eenlpe1/architecture-operations-skills`.
 
 ## Skills and routing
 
