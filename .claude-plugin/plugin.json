@@ -1,16 +1,29 @@
 {
   "name": "architecture-decisions",
-  "version": "1.0.1",
-  "description": "Decision skills for AWS infrastructure (Well-Architected Framework) and CI/CD pipelines (CALMS + DORA), each ending in a recorded decision.",
+  "version": "1.1.0",
+  "description": "Architecture decisions and CLI-based DevOps, SRE, Terraform, incident response, and deployment verification workflows.",
   "author": {
     "name": "Emmanuel Enalpe",
     "url": "https://github.com/eenlpe1"
   },
-  "repository": "https://github.com/eenlpe1/architecture-decisions",
+  "repository": "https://github.com/eenlpe1/architecture-operations-skills",
   "license": "MIT",
-  "keywords": ["aws", "well-architected", "devops", "ci-cd", "calms", "dora", "infrastructure"],
+  "keywords": [
+    "aws",
+    "well-architected",
+    "devops",
+    "ci-cd",
+    "calms",
+    "dora",
+    "infrastructure",
+    "sre",
+    "terraform",
+    "incident-response",
+    "deployment"
+  ],
   "skills": [
     "./skills/infra-decisions",
-    "./skills/devops-decisions"
+    "./skills/devops-decisions",
+    "./skills/devops-operations"
   ]
 }

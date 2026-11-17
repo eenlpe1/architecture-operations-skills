@@ -1,11 +1,15 @@
 ---
 name: devops-decisions
-description: Design, audit, or optimize a CI/CD pipeline using the CALMS framework and DORA metrics, and record the decision. Use when the user wants to build a CI/CD pipeline from scratch, audit an existing pipeline for risk and technical debt, optimize pipeline reliability/security/velocity, or wants a DevOps/platform decision written down.
+description: Design, audit, or improve a CI/CD delivery system using CALMS and DORA metrics, and record its design decisions. Use for pipeline architecture, release strategy, and delivery-process improvements. For a failed or skipped workflow run, deployment incident, or recovery check, start with devops-operations.
 ---
 
 # DevOps Decisions
 
-Every CI/CD pipeline choice trades the five CALMS principles against each other — more automation costs setup time, tighter gates slow lead time, broader sharing costs documentation effort. This skill makes that trade-off explicit across three engagements — building a pipeline from scratch, auditing one that exists, or optimizing one that's running — and leaves behind a record of what was decided and why.
+CI/CD pipeline choices affect the five CALMS principles — for example, more automation can require setup effort and tighter gates can affect lead time. This skill evaluates those effects across building, auditing, and improving pipelines, and records the resulting design decisions.
+
+## Scope and handoff
+
+Use this skill for the delivery system's design and improvement. Infrastructure service-selection and Well-Architected choices belong to `infra-decisions`; failed runs, operational Terraform work, incidents, recovery checks, and SRE reliability reviews belong to `devops-operations`. For a failed workflow plus a request to redesign promotion, let operations establish the failure evidence first, then evaluate the lasting pipeline change here. A routine operational repair does not require CALMS scoring or a decision record.
 
 ## Steps
 
@@ -13,12 +17,12 @@ Every CI/CD pipeline choice trades the five CALMS principles against each other 
 
 2. **Do the mode's legwork** — before recommending anything, gather what the mode needs:
    - **Build** — the application's architecture, tech stack, deployment targets, security/compliance requirements, and the org's existing workflows.
-   - **Audit** — walk every dimension in [`AUDIT-DIMENSIONS.md`](AUDIT-DIMENSIONS.md); mark each pass / risk / gap rather than skipping it because it "looks fine."
-   - **Optimize** — the pipeline's current DORA metrics baseline (deployment frequency, lead time for changes, change failure rate, MTTR) and the specific complaint driving the request.
+   - **Audit** — walk every dimension in [`AUDIT-DIMENSIONS.md`](AUDIT-DIMENSIONS.md); mark each pass / risk / gap / unknown with evidence. Unknown means required evidence is unavailable.
+   - **Optimize** — gather the specific complaint and available DORA baseline for the application or service: change lead time, deployment frequency, failed deployment recovery time, change fail rate, and deployment rework rate. Record the measurement window and missing measurements; do not invent values or equate general incident MTTR with recovery from a failed deployment. See [DORA's metric definitions](https://dora.dev/guides/dora-metrics/).
 
-   Done when every item for the active mode carries an explicit finding.
+   Done when every item for the active mode carries an explicit finding or a named evidence gap.
 
-3. **Score against CALMS** — for each of the five principles, give a verdict: up, down, or neutral, with a one-line reason. Don't skip a principle because it "obviously doesn't apply" — write "neutral: `<reason>`" rather than omitting it. If a verdict isn't obvious from the one-liner, check that principle's practices in [`CALMS.md`](CALMS.md). Done when all five principles have a stated verdict.
+3. **Score against CALMS** — state the baseline, then assess each principle as up, down, neutral, or unknown with evidence and a short reason. Neutral means no material difference; unknown means evidence is missing. Address all five, explaining any non-applicable area. For an audit of the current system, assess the recommendation against the current design and keep the dimension findings separate. Consult [`CALMS.md`](CALMS.md) when interpreting a principle. Done when all five have a supported assessment or an explicit evidence gap.
 
    - **Culture** — shared ownership of the pipeline and blameless response to failure, versus a single gatekeeper team.
    - **Automation** — pipeline, infrastructure, and policy as code; how much still needs a human hand.
@@ -26,6 +30,6 @@ Every CI/CD pipeline choice trades the five CALMS principles against each other 
    - **Measurement** — visibility into the DORA metrics baseline and pipeline health.
    - **Sharing** — how legible the pipeline's standards and decisions are to the next engineer.
 
-4. **Prioritize the recommendation** — order findings or recommendations by business value against engineering effort, and name which CALMS principle each one serves. State the trade-off explicitly: what this plan prioritizes and what it knowingly defers. A recommendation list with nothing deferred hasn't been prioritized — look harder.
+4. **Prioritize the recommendation** — order findings or recommendations by business value against engineering effort, and name which CALMS principle each serves. State the accepted costs, risks, and any deferred work. If no material downside or deferral is supported by the evidence, say so; prioritization does not require inventing one.
 
-5. **Record it** — write the decision as a short markdown file: the mode and scope, the mode's findings, the five-principle CALMS scoring, the prioritized recommendations with rationale, and the deferred trade-off. Reuse an existing decisions location in the repo if one exists (e.g. `docs/adr/`, `docs/decisions/`, `docs/architecture-decisions/`, `docs/pipeline-decisions/`); otherwise create `docs/pipeline-decisions/` and name the file `YYYY-MM-DD-<slug>.md`. Done when the file states chosen actions, not just a comparison.
+5. **Record it** — write a short markdown file with mode, scope, evidence, CALMS assessment, prioritized recommendations, and accepted trade-offs. Reuse an existing decisions location in the repo if one exists (e.g. `docs/adr/`, `docs/decisions/`, `docs/architecture-decisions/`, `docs/pipeline-decisions/`); otherwise create `docs/pipeline-decisions/` and name the file `YYYY-MM-DD-<slug>.md`. Distinguish proposed recommendations from accepted decisions, and record evidence gaps with next actions. Done when decision status and concrete next actions are clear. Recording a pipeline decision does not authorize workflow reruns, deployments, or live infrastructure changes.

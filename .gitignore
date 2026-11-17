@@ -1,0 +1,10 @@
+# Local development tasks and operational artifacts
+.scratch/
+__pycache__/
+*.pyc
+.venv/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.env
+.env.*

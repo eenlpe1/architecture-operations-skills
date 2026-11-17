@@ -1,13 +1,13 @@
 {
   "name": "architecture-decisions",
-  "version": "1.0.1",
-  "description": "Decision skills for AWS infrastructure and CI/CD pipelines, each ending in a recorded decision.",
+  "version": "1.1.0",
+  "description": "Architecture decisions and CLI-based DevOps, SRE, Terraform, incident response, and deployment verification workflows.",
   "author": {
     "name": "Emmanuel Enalpe",
     "url": "https://github.com/eenlpe1"
   },
-  "homepage": "https://github.com/eenlpe1/architecture-decisions",
-  "repository": "https://github.com/eenlpe1/architecture-decisions",
+  "homepage": "https://github.com/eenlpe1/architecture-operations-skills",
+  "repository": "https://github.com/eenlpe1/architecture-operations-skills",
   "license": "MIT",
   "keywords": [
     "aws",
@@ -16,24 +16,31 @@
     "ci-cd",
     "calms",
     "dora",
-    "infrastructure"
+    "infrastructure",
+    "sre",
+    "terraform",
+    "incident-response",
+    "deployment"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Architecture Decisions",
-    "shortDescription": "Make and record infrastructure and CI/CD decisions.",
-    "longDescription": "Evaluate AWS infrastructure choices against the Well-Architected Framework and CI/CD choices against CALMS and DORA, then record the decision and its accepted trade-offs.",
+    "displayName": "Architecture & Operations Skills",
+    "shortDescription": "Decide, investigate, fix, and verify engineering work.",
+    "longDescription": "Record architecture and pipeline decisions, investigate incidents, review Terraform changes, verify deployments, and improve service reliability through portable CLI-based workflows.",
     "developerName": "Emmanuel Enalpe",
     "category": "Developer Tools",
     "capabilities": [
       "Analysis",
       "Write"
     ],
-    "websiteURL": "https://github.com/eenlpe1/architecture-decisions",
+    "websiteURL": "https://github.com/eenlpe1/architecture-operations-skills",
     "defaultPrompt": [
       "Compare two AWS architecture options.",
       "Audit this AWS setup against all six pillars.",
-      "Audit and improve this CI/CD pipeline."
+      "Audit and improve this CI/CD pipeline.",
+      "Investigate this failed deployment and verify recovery.",
+      "Review this Terraform plan for operational risk.",
+      "Review this service\u2019s reliability and alert quality."
     ],
     "brandColor": "#FF9900"
   }
